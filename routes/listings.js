@@ -12,7 +12,7 @@ router.get('/:id', listingsCtrl.show) //done
 router.use(decodeUserFromToken)
 router.post('/', checkAuth,listingsCtrl.create) //done
 router.put('/:id', checkAuth,listingsCtrl.update) //done
-router.put('/:id/purchase', checkAuth,listingsCtrl.purchase)
+router.put('/:id/purchase', checkAuth,listingsCtrl.purchase) //done
 router.delete('/:id', checkAuth, listingsCtrl.deleteListing)
 
 module.exports = router

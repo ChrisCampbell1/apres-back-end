@@ -61,7 +61,9 @@ async function purchase(req, res) {
 
 async function deleteListing(req, res) {
   try {
-    
+    const listing = await Listing.findByPk(req.params.id)
+    await listing.destroy()
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err:error })
