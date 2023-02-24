@@ -44,7 +44,6 @@ module.exports = {
       },
       buyerId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         onDelete: 'CASCADE',
         references: {
         model: 'Profiles',

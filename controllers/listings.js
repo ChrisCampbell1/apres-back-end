@@ -27,7 +27,9 @@ async function show(req, res) {
 
 async function create(req, res) {
   try {
-    
+    req.body.sellerId = req.user.profile.id
+    const listing = await Listing.create(req.body)
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err:error })
