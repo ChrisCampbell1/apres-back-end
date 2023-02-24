@@ -11,12 +11,10 @@ module.exports = {
      */
     await queryInterface.addColumn('Profiles', 'city', { 
       type: Sequelize.STRING,
-      allowNull: false
       })
     await queryInterface.addColumn('Profiles', 'about', { type: Sequelize.STRING })
     await queryInterface.addColumn('Profiles', 'state', { 
       type: Sequelize.ENUM("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"),
-      allowNull: false,
       defaultValue: 'CO'
       })
   },
