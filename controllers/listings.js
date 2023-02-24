@@ -3,12 +3,7 @@ const cloudinary = require('cloudinary').v2
 
 async function index(req, res) {
   try {
-    const listings = await Listing.findAll({
-      include: [{ 
-        model: Profile, as: "seller",
-        model: Profile, as: "buyer"
-      }]
-    })
+    const listings = await Listing.findAll()
     res.status(200).json(listings)
   } catch (error) {
     console.log(error)
@@ -18,7 +13,8 @@ async function index(req, res) {
 
 async function show(req, res) {
   try {
-    
+    const listing = await Listing.findByPk(req.params.id)
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err:error })
