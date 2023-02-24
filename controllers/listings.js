@@ -47,7 +47,12 @@ async function update(req, res) {
 
 async function purchase(req, res) {
   try {
-    
+    req.body.buyerId = req.user.profile.id
+    req.body.status = "Sold"
+    const listing = await Listing.findByPk(req.params.id)
+    listing.set(req.body)
+    await listing.save()
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err:error })

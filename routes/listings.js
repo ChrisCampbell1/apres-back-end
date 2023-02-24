@@ -11,7 +11,7 @@ router.get('/:id', listingsCtrl.show) //done
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth,listingsCtrl.create) //done
-router.put('/:id', checkAuth,listingsCtrl.update)
+router.put('/:id', checkAuth,listingsCtrl.update) //done
 router.put('/:id/purchase', checkAuth,listingsCtrl.purchase)
 router.delete('/:id', checkAuth, listingsCtrl.deleteListing)
 
