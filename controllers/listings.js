@@ -34,7 +34,11 @@ async function create(req, res) {
 
 async function update(req, res) {
   try {
-    
+    req.body.sellerId = req.user.profile.id
+    const listing = await Listing.findByPk(req.params.id)
+    listing.set(req.body)
+    await listing.save()
+    res.status(200).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err:error })
