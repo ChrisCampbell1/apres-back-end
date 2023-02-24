@@ -18,7 +18,12 @@ async function index(req, res) {
 
 async function show(req, res) {
   try {
-    const listing = await Listing.findByPk(req.params.id)
+    const listing = await Listing.findByPk(req.params.id, {
+      include: [
+        { model: Profile, as: "seller" },
+        { model: Profile, as: "buyer" }
+      ]
+    })
     res.status(200).json(listing)
   } catch (error) {
     console.log(error)
