@@ -9,6 +9,7 @@ async function index(req, res) {
         { model: Listing, as: "listingsPurchased" }
       ]
     })
+    console.log(profiles, "THESE ARE THE PROFILES")
     res.json(profiles)
   } catch (error) {
     console.log(error)
@@ -33,4 +34,18 @@ async function addPhoto(req, res) {
   }
 }
 
-module.exports = { index, addPhoto }
+async function update(req, res) {
+  try {
+    const profile = await Profile.findByPk(req.params.id)
+    console.log(profile, "profile")
+    console.log(req.body, "body")
+    profile.set(req.body)
+    await profile.save()
+    res.status(200).json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: error })
+  }
+}
+
+module.exports = { index, addPhoto, update }
