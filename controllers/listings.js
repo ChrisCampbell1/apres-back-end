@@ -16,6 +16,27 @@ async function index(req, res) {
   }
 }
 
+async function indexCategory(req, res) {
+  try {
+    category = req.params.category
+    category = category.replace(/-/g,' ')
+    console.log(category)
+    const listings = await Listing.findAll({
+      where: {
+        category: category
+      },
+      include: [
+        { model: Profile, as: "seller" },
+        { model: Profile, as: "buyer" }
+      ]
+    })
+    res.status(200).json(listings)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err:error })
+  }
+}
+
 async function show(req, res) {
   try {
     const listing = await Listing.findByPk(req.params.id, {
@@ -91,6 +112,7 @@ async function addPhoto(req, res) {
 
 module.exports = {
   index,
+  indexCategory,
   show,
   create,
   update,

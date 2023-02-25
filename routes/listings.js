@@ -5,8 +5,9 @@ const middleware = require('../middleware/auth.js')
 const { decodeUserFromToken, checkAuth } = middleware
 
 /*---------- Public Routes ----------*/
-router.get('/', listingsCtrl.index)
+router.get('/category', listingsCtrl.index)
 router.get('/:id', listingsCtrl.show)
+router.get('/category/:category', listingsCtrl.indexCategory)
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
