@@ -62,7 +62,11 @@ module.exports = (sequelize, DataTypes) => {
     manufacturer: DataTypes.STRING,
     yearManufactured: DataTypes.INTEGER,
     dimensions: DataTypes.STRING,
-    material: DataTypes.STRING
+    material: DataTypes.STRING,
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Listing',
