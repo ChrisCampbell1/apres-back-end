@@ -11,6 +11,7 @@ router.get('/category/:category', listingsCtrl.indexCategory)
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
+router.get('/profile/:id', checkAuth, listingsCtrl.indexByUser)
 router.post('/', checkAuth,listingsCtrl.create)
 router.put('/:id', checkAuth,listingsCtrl.update)
 router.put('/:id/purchase', checkAuth,listingsCtrl.purchase)

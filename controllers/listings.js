@@ -37,6 +37,24 @@ async function indexCategory(req, res) {
   }
 }
 
+async function indexByUser(req, res) {
+  try {
+    const listings = await Listing.findAll({
+      where: {
+        sellerId: req.params.id
+      },
+      include: [
+        { model: Profile, as: "seller" },
+        { model: Profile, as: "buyer" }
+      ]
+    })
+    res.status(200).json(listings)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err:error })
+  }
+}
+
 async function show(req, res) {
   try {
     const listing = await Listing.findByPk(req.params.id, {
@@ -121,6 +139,7 @@ async function addPhoto(req, res) {
 module.exports = {
   index,
   indexCategory,
+  indexByUser,
   show,
   create,
   update,
