@@ -14,6 +14,7 @@ module.exports = {
         allowNull: false,
       },
       photo: Sequelize.STRING,
+      email: Sequelize.STRING,
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

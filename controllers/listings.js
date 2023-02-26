@@ -55,6 +55,7 @@ async function show(req, res) {
 async function create(req, res) {
   try {
     req.body.sellerId = req.user.profile.id
+    console.log(req.body, "BODY")
     const listing = await Listing.create(req.body)
     res.status(200).json(listing)
   } catch (error) {
@@ -103,7 +104,15 @@ async function deleteListing(req, res) {
 
 async function addPhoto(req, res) {
   try {
-
+    const imageFile = req.files.photo.path
+    const profile = await Profile.findByPk(req.params.id)
+    const image = await cloudinary.uploader.upload(
+      imageFile, 
+      { tags: `${req.user.email}` }
+    )
+    profile.photo = image.url
+    await profile.save()
+    res.status(201).json(profile.photo)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })

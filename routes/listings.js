@@ -14,6 +14,7 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth,listingsCtrl.create)
 router.put('/:id', checkAuth,listingsCtrl.update)
 router.put('/:id/purchase', checkAuth,listingsCtrl.purchase)
+router.put('/:id/add-photo', checkAuth, listingsCtrl.addPhoto)
 router.delete('/:id', checkAuth, listingsCtrl.deleteListing)
 
 module.exports = router
