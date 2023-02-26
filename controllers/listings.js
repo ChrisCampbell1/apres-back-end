@@ -104,15 +104,14 @@ async function deleteListing(req, res) {
 
 async function addPhoto(req, res) {
   try {
-    const imageFile = req.files.photo.path
-    const profile = await Profile.findByPk(req.params.id)
+    const imageFile = req.files.image.path
+    const listing = await Listing.findByPk(req.params.id)
     const image = await cloudinary.uploader.upload(
-      imageFile, 
-      { tags: `${req.user.email}` }
+      imageFile
     )
-    profile.photo = image.url
-    await profile.save()
-    res.status(201).json(profile.photo)
+    listing.image = image.url
+    await listing.save()
+    res.status(201).json(listing)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })
