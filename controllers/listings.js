@@ -4,6 +4,9 @@ const cloudinary = require('cloudinary').v2
 async function index(req, res) {
   try {
     const listings = await Listing.findAll({
+      where: {
+        status: ["For Sale", "On Hold"] 
+      },
       include: [
         { model: Profile, as: "seller" },
         { model: Profile, as: "buyer" }
@@ -23,7 +26,8 @@ async function indexCategory(req, res) {
     console.log(category)
     const listings = await Listing.findAll({
       where: {
-        category: category
+        category: category,
+        status: ["For Sale", "On Hold"] 
       },
       include: [
         { model: Profile, as: "seller" },
